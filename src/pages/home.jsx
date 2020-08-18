@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import Grid from "@material-ui/core/Grid"
 
-import { axiosInstance } from "../services/axios"
+import { getAllTweets } from "../services/tweet"
 
 import Tweet from "../components/Tweet"
 
@@ -11,10 +11,8 @@ class home extends Component {
 	}
 
 	componentDidMount() {
-		axiosInstance
-			.get("/tweets")
+		getAllTweets()
 			.then(({ data }) => {
-				console.log(data)
 				this.setState({
 					tweets: data.tweets,
 				})
