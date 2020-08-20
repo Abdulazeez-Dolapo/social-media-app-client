@@ -4,7 +4,7 @@ import withStyles from "@material-ui/core/styles/withStyles"
 import { Link } from "react-router-dom"
 
 import Icon from "../images/logo.png"
-import { signUp, logIn } from "../services/auth"
+import { signUp, userLogin } from "../services/auth"
 
 // Material UI components
 import Grid from "@material-ui/core/Grid"
@@ -46,7 +46,7 @@ class signup extends Component {
 			}
 
 			await signUp(newUserData)
-			const { data } = await logIn({
+			const { data } = await userLogin({
 				email: this.state.email,
 				password: this.state.password,
 			})
