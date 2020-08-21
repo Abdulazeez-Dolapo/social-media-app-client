@@ -26,7 +26,6 @@ class login extends Component {
 		this.state = {
 			email: "",
 			password: "",
-			errors: {},
 		}
 	}
 
@@ -50,9 +49,8 @@ class login extends Component {
 	render() {
 		const {
 			classes,
-			UI: { loading },
+			UI: { loading, errors },
 		} = this.props
-		const { errors } = this.state
 
 		return (
 			<Grid container className={classes.formContainer}>

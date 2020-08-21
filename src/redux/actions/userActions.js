@@ -1,8 +1,7 @@
-import axios from "axios"
 import { setAxiosHeaders } from "../../services/axios"
 
 import { SET_USER, SET_ERRORS, CLEAR_ERRORS, LOADING_UI } from "../types"
-import { userLogin, getUserData } from "../../services/auth"
+import { userLogin, getUserData, signUp } from "../../services/auth"
 
 export const loginUser = (userData, history) => async dispatch => {
 	try {
@@ -24,6 +23,26 @@ export const loginUser = (userData, history) => async dispatch => {
 		})
 	}
 }
+
+export const userSignup = (newUserData, history) => async dispatch => {
+	try {
+		dispatch({ type: LOADING_UI })
+		await signUp(newUserData)
+		const loginCredentials = {
+			email: newUserData.email,
+			password: newUserData.password,
+		}
+		dispatch(loginUser(loginCredentials, history))
+	} catch (error) {
+		console.log(error.response)
+		dispatch({
+			type: SET_ERRORS,
+			payload: error.response.data.error,
+		})
+	}
+}
+
+export const logout = () => dispatch => {}
 
 export const setUserData = () => async dispatch => {
 	try {

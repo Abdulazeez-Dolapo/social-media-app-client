@@ -4,7 +4,6 @@ import withStyles from "@material-ui/core/styles/withStyles"
 import { Link } from "react-router-dom"
 
 import Icon from "../images/logo.png"
-import { signUp, userLogin } from "../services/auth"
 
 // Material UI components
 import Grid from "@material-ui/core/Grid"
@@ -12,6 +11,10 @@ import Typography from "@material-ui/core/Typography"
 import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
 import CircularProgress from "@material-ui/core/CircularProgress"
+
+// Redux
+import { connect } from "react-redux"
+import { userSignup } from "../redux/actions/userActions"
 
 const styles = theme => ({
 	...theme.customStyles,
@@ -25,46 +28,19 @@ class signup extends Component {
 			password: "",
 			confirmPassword: "",
 			handle: "",
-			loading: false,
-			errors: {},
 		}
 	}
 
 	handleSubmit = async event => {
 		event.preventDefault()
-		try {
-			this.setState(state => ({
-				...state,
-				loading: true,
-			}))
-
-			const newUserData = {
-				email: this.state.email,
-				password: this.state.password,
-				confirmPassword: this.state.confirmPassword,
-				handle: this.state.handle,
-			}
-
-			await signUp(newUserData)
-			const { data } = await userLogin({
-				email: this.state.email,
-				password: this.state.password,
-			})
-			localStorage.setItem("FBToken", `Bearer ${data.token}`)
-
-			this.setState(state => ({
-				...state,
-				loading: false,
-			}))
-			this.props.history.replace("/")
-		} catch (error) {
-			console.log(error.response.data.error)
-			this.setState(state => ({
-				...state,
-				loading: false,
-				errors: error.response.data.error,
-			}))
+		const newUserData = {
+			email: this.state.email,
+			password: this.state.password,
+			confirmPassword: this.state.confirmPassword,
+			handle: this.state.handle,
 		}
+
+		this.props.userSignup(newUserData, this.props.history)
 	}
 
 	handleChange = event => {
@@ -76,8 +52,10 @@ class signup extends Component {
 	}
 
 	render() {
-		const { classes } = this.props
-		const { errors, loading } = this.state
+		const {
+			classes,
+			UI: { errors, loading },
+		} = this.props
 
 		return (
 			<Grid container className={classes.formContainer}>
@@ -181,6 +159,21 @@ class signup extends Component {
 
 signup.propType = {
 	classes: PropTypes.object.isRequired,
+	UI: PropTypes.func.isRequired,
+	user: PropTypes.func.isRequired,
+	userSignup: PropTypes.func.isRequired,
 }
 
-export default withStyles(styles)(signup)
+const mapStateToProps = state => ({
+	UI: state.UI,
+	user: state.user,
+})
+
+const mapActionToProps = {
+	userSignup,
+}
+
+export default connect(
+	mapStateToProps,
+	mapActionToProps
+)(withStyles(styles)(signup))
