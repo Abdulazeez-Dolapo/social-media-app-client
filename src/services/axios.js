@@ -5,6 +5,9 @@ export const axiosInstance = axios.create({
 	timeout: 10000,
 })
 
-export const setAxiosHeaders = token => {
+export const setAuthorizationHeaders = token => {
 	axiosInstance.defaults.headers.common["Authorization"] = token
+}
+export const removeAuthorizationHeaders = token => {
+	delete axiosInstance.defaults.headers.common["Authorization"]
 }

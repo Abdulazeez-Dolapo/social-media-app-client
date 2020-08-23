@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid"
 import { getAllTweets } from "../services/tweet"
 
 import Tweet from "../components/Tweet"
+import Profile from "../components/Profile"
 
 class home extends Component {
 	state = {
@@ -35,7 +36,7 @@ class home extends Component {
 				</Grid>
 
 				<Grid item xs={12} sm={4}>
-					<p>Profile</p>
+					<Profile />
 				</Grid>
 			</Grid>
 		)
