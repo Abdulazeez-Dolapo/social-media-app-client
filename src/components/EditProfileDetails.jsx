@@ -10,6 +10,11 @@ import DialogActions from "@material-ui/core/DialogActions"
 import DialogContent from "@material-ui/core/DialogContent"
 import DialogContentText from "@material-ui/core/DialogContentText"
 import DialogTitle from "@material-ui/core/DialogTitle"
+import IconButton from "@material-ui/core/IconButton"
+import Tooltip from "@material-ui/core/Tooltip"
+
+// Icons
+import EditIcon from "@material-ui/icons/Edit"
 
 // Redux
 import { connect } from "react-redux"
@@ -17,6 +22,9 @@ import { editUserDetails } from "../redux/actions/userActions"
 
 const styles = theme => ({
 	...theme.customStyles,
+	button: {
+		float: "right",
+	},
 })
 
 class EditProfileDetails extends Component {
@@ -65,6 +73,7 @@ class EditProfileDetails extends Component {
 		}
 
 		this.props.editUserDetails(userData)
+		this.handleClickClose()
 	}
 
 	handleInput = event => {
@@ -80,13 +89,18 @@ class EditProfileDetails extends Component {
 
 		return (
 			<Fragment>
-				<Button
+				{/* <Button
 					variant="outlined"
 					color="primary"
 					onClick={this.handleClickOpen}
 				>
 					Edit Profile Details
-				</Button>
+				</Button> */}
+				<Tooltip title="Edit profile details" placement="top">
+					<IconButton onClick={this.handleClickOpen} className="button">
+						<EditIcon color="primary" />
+					</IconButton>
+				</Tooltip>
 				<Dialog
 					open={this.state.openDialog}
 					onClose={this.handleClickClose}
