@@ -2,6 +2,9 @@ import React, { Component, Fragment } from "react"
 import PropTypes from "prop-types"
 import withStyles from "@material-ui/core/styles/withStyles"
 
+// My Created Components
+import MyIconButton from "./Utilities/MyIconButton"
+
 // Material UI components
 import Button from "@material-ui/core/Button"
 import TextField from "@material-ui/core/TextField"
@@ -10,8 +13,6 @@ import DialogActions from "@material-ui/core/DialogActions"
 import DialogContent from "@material-ui/core/DialogContent"
 import DialogContentText from "@material-ui/core/DialogContentText"
 import DialogTitle from "@material-ui/core/DialogTitle"
-import IconButton from "@material-ui/core/IconButton"
-import Tooltip from "@material-ui/core/Tooltip"
 
 // Icons
 import EditIcon from "@material-ui/icons/Edit"
@@ -96,11 +97,14 @@ class EditProfileDetails extends Component {
 				>
 					Edit Profile Details
 				</Button> */}
-				<Tooltip title="Edit profile details" placement="top">
-					<IconButton onClick={this.handleClickOpen} className="button">
-						<EditIcon color="primary" />
-					</IconButton>
-				</Tooltip>
+				<MyIconButton
+					buttonClass="button"
+					onClick={this.handleClickOpen}
+					toolTipTitle="Edit profile details"
+				>
+					<EditIcon color="primary" />
+				</MyIconButton>
+
 				<Dialog
 					open={this.state.openDialog}
 					onClose={this.handleClickClose}
