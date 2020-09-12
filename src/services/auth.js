@@ -11,3 +11,11 @@ export const signUp = userData => {
 export const getUserData = () => {
 	return axiosInstance.get("/user/get-details")
 }
+
+export const uploadImage = formData => {
+	return axiosInstance.post("/user/upload-image", formData)
+}
+
+export const editUserData = userData => {
+	return axiosInstance.post("/user/update-details", userData)
+}

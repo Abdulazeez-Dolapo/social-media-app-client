@@ -12,7 +12,13 @@ import {
 	lOADING_USER,
 	STOP_lOADING_USER,
 } from "../types"
-import { userLogin, getUserData, signUp } from "../../services/auth"
+import {
+	userLogin,
+	getUserData,
+	signUp,
+	uploadImage,
+	editUserData,
+} from "../../services/auth"
 
 export const loginUser = (userData, history) => async dispatch => {
 	try {
@@ -70,5 +76,31 @@ export const setUserData = () => async dispatch => {
 		})
 	} catch (error) {
 		console.log(error.response)
+	}
+}
+
+export const uploadUserImage = formData => async dispatch => {
+	try {
+		dispatch({ type: lOADING_USER })
+		const { data } = await uploadImage(formData)
+		console.log(data)
+		dispatch(setUserData())
+	} catch (error) {
+		console.log(error.response)
+	}
+}
+
+export const editUserDetails = userDetails => async dispatch => {
+	try {
+		dispatch({ type: lOADING_USER })
+		const { data } = await editUserData(userDetails)
+		console.log(data)
+		dispatch(setUserData())
+	} catch (error) {
+		console.log(error.response)
+		dispatch({
+			type: SET_ERRORS,
+			payload: error.response.data.error,
+		})
 	}
 }
