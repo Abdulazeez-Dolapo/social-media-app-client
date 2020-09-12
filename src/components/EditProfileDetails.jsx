@@ -98,7 +98,7 @@ class EditProfileDetails extends Component {
 					Edit Profile Details
 				</Button> */}
 				<MyIconButton
-					buttonClass="button"
+					buttonClass={classes.button}
 					onClick={this.handleClickOpen}
 					toolTipTitle="Edit profile details"
 				>

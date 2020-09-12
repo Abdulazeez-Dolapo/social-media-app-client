@@ -32,7 +32,7 @@ class Navbar extends Component {
 								// onClick={this.handleClickOpen}
 								toolTipTitle="Post a Tweet"
 							>
-								<AddIcon color="primary" />
+								<AddIcon />
 							</MyIconButton>
 
 							<Link to="/">
@@ -41,7 +41,7 @@ class Navbar extends Component {
 									// onClick={this.handleClickOpen}
 									toolTipTitle="Home"
 								>
-									<HomeIcon color="primary" />
+									<HomeIcon />
 								</MyIconButton>
 							</Link>
 
@@ -50,7 +50,7 @@ class Navbar extends Component {
 								// onClick={this.handleClickOpen}
 								toolTipTitle="Notifications"
 							>
-								<NotificationsIcon color="primary" />
+								<NotificationsIcon />
 							</MyIconButton>
 						</Fragment>
 					) : (
