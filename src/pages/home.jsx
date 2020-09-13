@@ -1,33 +1,36 @@
 import React, { Component } from "react"
+import PropTypes from "prop-types"
+
+// Material UI
 import Grid from "@material-ui/core/Grid"
 
-import { getAllTweets } from "../services/tweet"
-
+// My components
 import Tweet from "../components/Tweet"
 import Profile from "../components/Profile"
 
+// Redux
+import { connect } from "react-redux"
+import { getTweets } from "../redux/actions/dataActions"
+
 class home extends Component {
-	state = {
-		tweets: null,
-	}
+	// state = {
+	// 	tweets: [],
+	// }
 
 	componentDidMount() {
-		getAllTweets()
-			.then(({ data }) => {
-				this.setState({
-					tweets: data.tweets,
-				})
-			})
-			.catch(error => {
-				console.log(error.response)
-			})
+		this.props.getTweets()
+		// this.setState({
+		// 	tweets: tweets,
+		// })
 	}
 
 	render() {
-		const recentTweets = this.state.tweets ? (
-			this.state.tweets.map(tweet => <Tweet key={tweet.id} tweet={tweet} />)
-		) : (
+		const { loading, tweets } = this.props
+
+		const recentTweets = loading ? (
 			<p>Loading Tweets...</p>
+		) : (
+			tweets.map(tweet => <Tweet key={tweet.id} tweet={tweet} />)
 		)
 		return (
 			<Grid container spacing={2}>
@@ -43,4 +46,18 @@ class home extends Component {
 	}
 }
 
-export default home
+const mapStateToProps = state => ({
+	tweets: state.data.tweets,
+	loading: state.data.loading,
+})
+
+const mapActionsToProps = {
+	getTweets,
+}
+
+home.propTypes = {
+	tweets: PropTypes.array.isRequired,
+	loading: PropTypes.bool.isRequired,
+}
+
+export default connect(mapStateToProps, mapActionsToProps)(home)
