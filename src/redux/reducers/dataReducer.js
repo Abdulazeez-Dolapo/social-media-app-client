@@ -1,4 +1,4 @@
-import { SET_TWEETS, LOADING_DATA } from "../types"
+import { SET_TWEETS, LOADING_DATA, LIKE_TWEET, UNLIKE_TWEET } from "../types"
 
 const initialState = {
 	tweets: [],
@@ -19,6 +19,16 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				loading: true,
+			}
+
+		case LIKE_TWEET:
+		case UNLIKE_TWEET:
+			const index = state.tweets.findIndex(
+				tweet => tweet.id == action.payload.id
+			)
+			state.tweets[index] = action.payload
+			return {
+				...state,
 			}
 
 		default:

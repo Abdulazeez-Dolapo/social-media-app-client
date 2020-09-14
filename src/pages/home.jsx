@@ -13,15 +13,8 @@ import { connect } from "react-redux"
 import { getTweets } from "../redux/actions/dataActions"
 
 class home extends Component {
-	// state = {
-	// 	tweets: [],
-	// }
-
 	componentDidMount() {
 		this.props.getTweets()
-		// this.setState({
-		// 	tweets: tweets,
-		// })
 	}
 
 	render() {
