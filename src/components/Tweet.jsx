@@ -20,6 +20,7 @@ import Favorite from "@material-ui/icons/Favorite"
 
 // My created components
 import MyIconButton from "./Utilities/MyIconButton"
+import DeleteTweet from "./DeleteTweet"
 
 // Redux
 import { connect } from "react-redux"
@@ -27,6 +28,7 @@ import { likeTweet, unlikeTweet } from "../redux/actions/dataActions"
 
 const styles = {
 	card: {
+		position: "relative",
 		display: "flex",
 		marginBottom: 20,
 	},
@@ -68,7 +70,10 @@ export class Tweet extends Component {
 				likesCount,
 				commentsCount,
 			},
-			user: { authenticated },
+			user: {
+				authenticated,
+				credentials: { handle },
+			},
 		} = this.props
 
 		let likeButton
@@ -96,6 +101,11 @@ export class Tweet extends Component {
 			}
 		}
 
+		const deleteButton =
+			authenticated && userHandle === handle ? (
+				<DeleteTweet tweetId={id} />
+			) : null
+
 		return (
 			<Card className={classes.card}>
 				<CardMedia
@@ -112,6 +122,7 @@ export class Tweet extends Component {
 					>
 						{userHandle}
 					</Typography>
+					{deleteButton}
 					<Typography variant="body2" color="textSecondary">
 						{dayjs(createdAt).fromNow()}
 					</Typography>

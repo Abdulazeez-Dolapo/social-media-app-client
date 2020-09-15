@@ -1,9 +1,16 @@
-import { SET_TWEETS, LOADING_DATA, LIKE_TWEET, UNLIKE_TWEET } from "../types"
+import {
+	SET_TWEETS,
+	LOADING_DATA,
+	LIKE_TWEET,
+	UNLIKE_TWEET,
+	DELETE_TWEET,
+} from "../types"
 // import
 import {
 	getAllTweets,
 	likeSingleTweet,
 	unlikeSingleTweet,
+	deleteSingleTweet,
 } from "../../services/tweet"
 
 export const getTweets = () => async dispatch => {
@@ -39,5 +46,15 @@ export const unlikeTweet = tweetId => async dispatch => {
 		dispatch({ type: UNLIKE_TWEET, payload: data.tweet })
 	} catch (error) {
 		console.log(error.response.data.error)
+	}
+}
+
+export const deleteTweet = tweetId => async dispatch => {
+	try {
+		const { data } = await deleteSingleTweet(tweetId)
+		console.log(data)
+		dispatch({ type: DELETE_TWEET, payload: tweetId })
+	} catch (error) {
+		console.log(error.response)
 	}
 }

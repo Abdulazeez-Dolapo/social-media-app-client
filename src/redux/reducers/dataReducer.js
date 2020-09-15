@@ -1,4 +1,10 @@
-import { SET_TWEETS, LOADING_DATA, LIKE_TWEET, UNLIKE_TWEET } from "../types"
+import {
+	SET_TWEETS,
+	LOADING_DATA,
+	LIKE_TWEET,
+	UNLIKE_TWEET,
+	DELETE_TWEET,
+} from "../types"
 
 const initialState = {
 	tweets: [],
@@ -31,6 +37,12 @@ export default (state = initialState, action) => {
 					}
 					return tweet
 				}),
+			}
+
+		case DELETE_TWEET:
+			return {
+				...state,
+				tweets: state.tweets.filter(tweet => tweet.id !== action.payload),
 			}
 
 		default:
