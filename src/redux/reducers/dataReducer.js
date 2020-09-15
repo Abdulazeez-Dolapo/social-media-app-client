@@ -23,15 +23,17 @@ export default (state = initialState, action) => {
 
 		case LIKE_TWEET:
 		case UNLIKE_TWEET:
-			const index = state.tweets.findIndex(
-				tweet => tweet.id == action.payload.id
-			)
-			state.tweets[index] = action.payload
 			return {
 				...state,
+				tweets: state.tweets.map(tweet => {
+					if (tweet.id == action.payload.id) {
+						tweet = action.payload
+					}
+					return tweet
+				}),
 			}
 
 		default:
-			return { ...state }
+			return state
 	}
 }
