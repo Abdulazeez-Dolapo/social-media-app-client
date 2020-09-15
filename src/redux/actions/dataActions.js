@@ -1,16 +1,21 @@
 import {
 	SET_TWEETS,
 	LOADING_DATA,
+	LOADING_UI,
 	LIKE_TWEET,
 	UNLIKE_TWEET,
 	DELETE_TWEET,
+	POST_TWEET,
+	SET_ERRORS,
+	CLEAR_ERRORS,
 } from "../types"
-// import
+
 import {
 	getAllTweets,
 	likeSingleTweet,
 	unlikeSingleTweet,
 	deleteSingleTweet,
+	postSingleTweet,
 } from "../../services/tweet"
 
 export const getTweets = () => async dispatch => {
@@ -56,5 +61,22 @@ export const deleteTweet = tweetId => async dispatch => {
 		dispatch({ type: DELETE_TWEET, payload: tweetId })
 	} catch (error) {
 		console.log(error.response)
+	}
+}
+
+export const postTweet = newTweetData => async dispatch => {
+	try {
+		dispatch({ type: LOADING_UI })
+		const { data } = await postSingleTweet(newTweetData)
+		console.log(data)
+
+		dispatch({ type: POST_TWEET, payload: data.tweet })
+		dispatch({ type: CLEAR_ERRORS })
+	} catch (error) {
+		console.log(error.response.data.error)
+		dispatch({
+			type: SET_ERRORS,
+			payload: error.response.data.error,
+		})
 	}
 }

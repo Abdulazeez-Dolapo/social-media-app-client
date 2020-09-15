@@ -4,6 +4,7 @@ import {
 	LIKE_TWEET,
 	UNLIKE_TWEET,
 	DELETE_TWEET,
+	POST_TWEET,
 } from "../types"
 
 const initialState = {
@@ -43,6 +44,12 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				tweets: state.tweets.filter(tweet => tweet.id !== action.payload),
+			}
+
+		case POST_TWEET:
+			return {
+				...state,
+				tweets: [action.payload, ...state.tweets],
 			}
 
 		default:

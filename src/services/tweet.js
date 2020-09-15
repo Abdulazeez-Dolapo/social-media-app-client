@@ -15,3 +15,7 @@ export const unlikeSingleTweet = tweetId => {
 export const deleteSingleTweet = tweetId => {
 	return axiosInstance.delete(`/tweet/${tweetId}`)
 }
+
+export const postSingleTweet = tweetData => {
+	return axiosInstance.post(`/create-tweet`, tweetData)
+}

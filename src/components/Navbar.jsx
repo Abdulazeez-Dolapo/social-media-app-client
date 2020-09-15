@@ -4,6 +4,7 @@ import PropTypes from "prop-types"
 
 // My Created Components
 import MyIconButton from "./Utilities/MyIconButton"
+import PostTweet from "./PostTweet"
 
 // Material UI
 import AppBar from "@material-ui/core/AppBar"
@@ -11,7 +12,6 @@ import Toolbar from "@material-ui/core/Toolbar"
 import Button from "@material-ui/core/Button"
 
 // Icons
-import AddIcon from "@material-ui/icons/Add"
 import HomeIcon from "@material-ui/icons/Home"
 import NotificationsIcon from "@material-ui/icons/Notifications"
 
@@ -27,29 +27,15 @@ class Navbar extends Component {
 				<Toolbar className="nav-container">
 					{authenticated ? (
 						<Fragment>
-							<MyIconButton
-								// buttonClass="button"
-								// onClick={this.handleClickOpen}
-								toolTipTitle="Post a Tweet"
-							>
-								<AddIcon />
-							</MyIconButton>
+							<PostTweet />
 
 							<Link to="/">
-								<MyIconButton
-									// buttonClass="button"
-									// onClick={this.handleClickOpen}
-									toolTipTitle="Home"
-								>
+								<MyIconButton toolTipTitle="Home">
 									<HomeIcon />
 								</MyIconButton>
 							</Link>
 
-							<MyIconButton
-								// buttonClass="button"
-								// onClick={this.handleClickOpen}
-								toolTipTitle="Notifications"
-							>
+							<MyIconButton toolTipTitle="Notifications">
 								<NotificationsIcon />
 							</MyIconButton>
 						</Fragment>
