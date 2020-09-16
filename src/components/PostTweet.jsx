@@ -19,7 +19,7 @@ import CloseIcon from "@material-ui/icons/Close"
 
 // Redux
 import { connect } from "react-redux"
-import { postTweet } from "../redux/actions/dataActions"
+import { postTweet, clearErrors } from "../redux/actions/dataActions"
 
 const styles = theme => ({
 	...theme.customStyles,
@@ -65,6 +65,7 @@ class PostTweet extends Component {
 	}
 
 	handleClickClose = () => {
+		this.props.clearErrors()
 		this.clearState()
 		this.setState({
 			openDialog: false,
@@ -72,7 +73,7 @@ class PostTweet extends Component {
 	}
 
 	handleInput = event => {
-		this.setState({ errors: {} })
+		this.props.clearErrors()
 		const { name, value } = event.target
 		this.setState(state => ({
 			...state,
@@ -173,6 +174,7 @@ class PostTweet extends Component {
 
 PostTweet.propTypes = {
 	postTweet: PropTypes.func.isRequired,
+	clearErrors: PropTypes.func.isRequired,
 	classes: PropTypes.object.isRequired,
 	UI: PropTypes.object.isRequired,
 }
@@ -181,7 +183,7 @@ const mapStateToProps = state => ({
 	UI: state.UI,
 })
 
-const mapActionToProps = { postTweet }
+const mapActionToProps = { postTweet, clearErrors }
 
 export default connect(
 	mapStateToProps,

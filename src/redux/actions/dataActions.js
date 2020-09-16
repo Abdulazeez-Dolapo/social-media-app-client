@@ -26,7 +26,7 @@ export const getTweets = () => async dispatch => {
 
 		dispatch({ type: SET_TWEETS, payload: data.tweets })
 	} catch (error) {
-		console.log(error.response.data.error)
+		console.log(error)
 		dispatch({
 			type: SET_TWEETS,
 			payload: [],
@@ -40,7 +40,7 @@ export const likeTweet = tweetId => async dispatch => {
 		console.log(data)
 		dispatch({ type: LIKE_TWEET, payload: data.tweet })
 	} catch (error) {
-		console.log(error.response.data.error)
+		console.log(error)
 	}
 }
 
@@ -50,7 +50,7 @@ export const unlikeTweet = tweetId => async dispatch => {
 		console.log(data)
 		dispatch({ type: UNLIKE_TWEET, payload: data.tweet })
 	} catch (error) {
-		console.log(error.response.data.error)
+		console.log(error)
 	}
 }
 
@@ -73,10 +73,14 @@ export const postTweet = newTweetData => async dispatch => {
 		dispatch({ type: POST_TWEET, payload: data.tweet })
 		dispatch({ type: CLEAR_ERRORS })
 	} catch (error) {
-		console.log(error.response.data.error)
+		console.log(error.response)
 		dispatch({
 			type: SET_ERRORS,
 			payload: error.response.data.error,
 		})
 	}
+}
+
+export const clearErrors = () => dispatch => {
+	dispatch({ type: CLEAR_ERRORS })
 }
