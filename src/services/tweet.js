@@ -4,6 +4,10 @@ export const getAllTweets = () => {
 	return axiosInstance.get("/tweets")
 }
 
+export const getSingleTweet = tweetId => {
+	return axiosInstance.get(`/tweet/${tweetId}`)
+}
+
 export const likeSingleTweet = tweetId => {
 	return axiosInstance.post(`/tweet/${tweetId}/like`)
 }

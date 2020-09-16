@@ -21,6 +21,7 @@ import Favorite from "@material-ui/icons/Favorite"
 // My created components
 import MyIconButton from "./Utilities/MyIconButton"
 import DeleteTweet from "./DeleteTweet"
+import TweetDialog from "./TweetDialog"
 
 // Redux
 import { connect } from "react-redux"
@@ -122,18 +123,23 @@ export class Tweet extends Component {
 					>
 						{userHandle}
 					</Typography>
+
 					{deleteButton}
 					<Typography variant="body2" color="textSecondary">
 						{dayjs(createdAt).fromNow()}
 					</Typography>
+
 					<Typography variant="body1">{body}</Typography>
 					{likeButton}
 					<span>{likesCount} likes</span>
+
 					<MyIconButton toolTipTitle="comment">
 						<ChatIcon color="primary" />
 					</MyIconButton>
 					<span>{commentsCount} comments</span>
 				</CardContent>
+
+				<TweetDialog tweetId={id} userHandle={userHandle} />
 			</Card>
 		)
 	}

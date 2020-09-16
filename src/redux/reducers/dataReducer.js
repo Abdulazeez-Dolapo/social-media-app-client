@@ -1,5 +1,7 @@
 import {
 	SET_TWEETS,
+	SET_TWEET,
+	CLEAR_TWEET,
 	LOADING_DATA,
 	LIKE_TWEET,
 	UNLIKE_TWEET,
@@ -19,6 +21,20 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				tweets: action.payload,
+				loading: false,
+			}
+
+		case SET_TWEET:
+			return {
+				...state,
+				tweet: action.payload,
+				loading: false,
+			}
+
+		case CLEAR_TWEET:
+			return {
+				...state,
+				tweet: [],
 				loading: false,
 			}
 
