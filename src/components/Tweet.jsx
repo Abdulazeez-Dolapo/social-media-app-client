@@ -15,17 +15,15 @@ import Typography from "@material-ui/core/Typography"
 
 // Icons
 import ChatIcon from "@material-ui/icons/Chat"
-import FavoriteBorder from "@material-ui/icons/FavoriteBorder"
-import Favorite from "@material-ui/icons/Favorite"
 
 // My created components
 import MyIconButton from "./Utilities/MyIconButton"
 import DeleteTweet from "./DeleteTweet"
 import TweetDialog from "./TweetDialog"
+import LikeButton from "./LikeButton"
 
 // Redux
 import { connect } from "react-redux"
-import { likeTweet, unlikeTweet } from "../redux/actions/dataActions"
 
 const styles = {
 	card: {
@@ -43,20 +41,6 @@ const styles = {
 }
 
 export class Tweet extends Component {
-	isTweetLiked = () => {
-		return this.props.user.likes?.find(
-			like => like.tweetId == this.props.tweet.id
-		)
-	}
-
-	likeTweet = () => {
-		this.props.likeTweet(this.props.tweet.id)
-	}
-
-	unlikeTweet = () => {
-		this.props.unlikeTweet(this.props.tweet.id)
-	}
-
 	render() {
 		dayjs.extend(relativeTime)
 
@@ -76,31 +60,6 @@ export class Tweet extends Component {
 				credentials: { handle },
 			},
 		} = this.props
-
-		let likeButton
-		if (!authenticated) {
-			likeButton = (
-				<MyIconButton toolTipTitle="like">
-					<Link to="/login">
-						<FavoriteBorder color="primary" />
-					</Link>
-				</MyIconButton>
-			)
-		} else {
-			if (this.isTweetLiked()) {
-				likeButton = (
-					<MyIconButton onClick={this.unlikeTweet} toolTipTitle="unlike">
-						<Favorite color="primary" />
-					</MyIconButton>
-				)
-			} else {
-				likeButton = (
-					<MyIconButton onClick={this.likeTweet} toolTipTitle="like">
-						<FavoriteBorder color="primary" />
-					</MyIconButton>
-				)
-			}
-		}
 
 		const deleteButton =
 			authenticated && userHandle === handle ? (
@@ -130,7 +89,9 @@ export class Tweet extends Component {
 					</Typography>
 
 					<Typography variant="body1">{body}</Typography>
-					{likeButton}
+
+					<LikeButton tweetId={id} />
+
 					<span>{likesCount} likes</span>
 
 					<MyIconButton toolTipTitle="comment">
@@ -146,8 +107,6 @@ export class Tweet extends Component {
 }
 
 Tweet.propTypes = {
-	likeTweet: PropTypes.func.isRequired,
-	unlikeTweet: PropTypes.func.isRequired,
 	user: PropTypes.object.isRequired,
 	tweet: PropTypes.object.isRequired,
 	classes: PropTypes.object.isRequired,
@@ -157,9 +116,4 @@ const mapStateToProps = state => ({
 	user: state.user,
 })
 
-const mapActionToProps = { likeTweet, unlikeTweet }
-
-export default connect(
-	mapStateToProps,
-	mapActionToProps
-)(withStyles(styles)(Tweet))
+export default connect(mapStateToProps)(withStyles(styles)(Tweet))
