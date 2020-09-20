@@ -17,7 +17,7 @@ import Typography from "@material-ui/core/Typography"
 import ChatIcon from "@material-ui/icons/Chat"
 
 // My created components
-import MyIconButton from "./Utilities/MyIconButton"
+import MyIconButton from "../Utilities/MyIconButton"
 import DeleteTweet from "./DeleteTweet"
 import TweetDialog from "./TweetDialog"
 import LikeButton from "./LikeButton"
@@ -90,9 +90,7 @@ export class Tweet extends Component {
 
 					<Typography variant="body1">{body}</Typography>
 
-					<LikeButton tweetId={id} />
-
-					<span>{likesCount} likes</span>
+					<LikeButton tweetId={id} likesCount={likesCount} />
 
 					<MyIconButton toolTipTitle="comment">
 						<ChatIcon color="primary" />

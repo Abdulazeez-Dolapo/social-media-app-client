@@ -6,13 +6,13 @@ import jwtDecode from "jwt-decode"
 import { setAuthorizationHeaders } from "./services/axios"
 
 import styles from "./utils/theme"
-import AuthRoute from "./utils/AuthRoute"
 
+// Created Components
+import AuthRoute from "./utils/AuthRoute"
 import home from "./pages/home"
 import login from "./pages/login"
 import signup from "./pages/signup"
-
-import Navbar from "./components/Navbar"
+import Navbar from "./components/Layout/Navbar"
 
 // Redux
 import store from "./redux/store"

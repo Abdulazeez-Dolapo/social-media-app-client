@@ -5,8 +5,8 @@ import PropTypes from "prop-types"
 import Grid from "@material-ui/core/Grid"
 
 // My components
-import Tweet from "../components/Tweet"
-import Profile from "../components/Profile"
+import Tweet from "../components/Tweet/Tweet"
+import Profile from "../components/Profile/Profile"
 
 // Redux
 import { connect } from "react-redux"

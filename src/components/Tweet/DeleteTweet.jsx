@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import withStyles from "@material-ui/core/styles/withStyles"
 
 // My created components
-import MyIconButton from "./Utilities/MyIconButton"
+import MyIconButton from "../Utilities/MyIconButton"
 
 // Material UI components
 import Button from "@material-ui/core/Button"
@@ -16,12 +16,12 @@ import DeleteOutline from "@material-ui/icons/DeleteOutline"
 
 // Redux
 import { connect } from "react-redux"
-import { deleteTweet } from "../redux/actions/dataActions"
+import { deleteTweet } from "../../redux/actions/dataActions"
 
 const styles = {
 	deleteButton: {
 		position: "absolute",
-		top: "10%",
+		bottom: "0%",
 		left: "90%",
 	},
 }

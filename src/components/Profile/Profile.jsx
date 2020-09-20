@@ -6,7 +6,7 @@ import dayjs from "dayjs"
 
 // My Created Components
 import EditProfileDetails from "./EditProfileDetails"
-import MyIconButton from "./Utilities/MyIconButton"
+import MyIconButton from "../Utilities/MyIconButton"
 
 // Material UI components
 import Button from "@material-ui/core/Button"
@@ -23,7 +23,7 @@ import KeyboardReturn from "@material-ui/icons/KeyboardReturn"
 
 // Redux
 import { connect } from "react-redux"
-import { uploadUserImage, logoutUser } from "../redux/actions/userActions"
+import { uploadUserImage, logoutUser } from "../../redux/actions/userActions"
 
 const styles = theme => ({
 	...theme.customStyles,

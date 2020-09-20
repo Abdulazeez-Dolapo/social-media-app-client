@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import withStyles from "@material-ui/core/styles/withStyles"
 
 // My Created Components
-import MyIconButton from "./Utilities/MyIconButton"
+import MyIconButton from "../Utilities/MyIconButton"
 
 // Material UI components
 import Button from "@material-ui/core/Button"
@@ -19,7 +19,7 @@ import CloseIcon from "@material-ui/icons/Close"
 
 // Redux
 import { connect } from "react-redux"
-import { postTweet, clearErrors } from "../redux/actions/dataActions"
+import { postTweet, clearErrors } from "../../redux/actions/dataActions"
 
 const styles = theme => ({
 	...theme.customStyles,

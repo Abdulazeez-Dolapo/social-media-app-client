@@ -1,14 +1,17 @@
-import React, { Component } from "react"
+import React, { Component, Fragment } from "react"
 import PropTypes from "prop-types"
 import { Link } from "react-router-dom"
 
-import MyIconButton from "./Utilities/MyIconButton"
+// My created components
+import MyIconButton from "../Utilities/MyIconButton"
 
+// Icons
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder"
 import Favorite from "@material-ui/icons/Favorite"
 
+// Redux
 import { connect } from "react-redux"
-import { likeTweet, unlikeTweet } from "../redux/actions/dataActions"
+import { likeTweet, unlikeTweet } from "../../redux/actions/dataActions"
 
 export class LikeButton extends Component {
 	isTweetLiked = () => {
@@ -26,7 +29,10 @@ export class LikeButton extends Component {
 	}
 
 	render() {
-		const { authenticated } = this.props
+		const {
+			user: { authenticated },
+			likesCount,
+		} = this.props
 
 		let likeButton
 
@@ -54,20 +60,23 @@ export class LikeButton extends Component {
 			}
 		}
 
-		return likeButton
+		return (
+			<Fragment>
+				{likeButton} <span>{likesCount} likes</span>
+			</Fragment>
+		)
 	}
 }
 
 LikeButton.propTypes = {
-	authenticated: PropTypes.bool.isRequired,
 	user: PropTypes.object.isRequired,
 	tweetId: PropTypes.string.isRequired,
+	likesCount: PropTypes.number.isRequired,
 	likeTweet: PropTypes.func.isRequired,
 	unlikeTweet: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
-	authenticated: state.user.authenticated,
 	user: state.user,
 })
 

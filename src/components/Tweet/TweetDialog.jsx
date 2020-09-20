@@ -5,13 +5,12 @@ import dayjs from "dayjs"
 import { Link } from "react-router-dom"
 
 // My Created Components
-import MyIconButton from "./Utilities/MyIconButton"
+import MyIconButton from "../Utilities/MyIconButton"
+import LikeButton from "./LikeButton"
 
 // Material UI components
-import Button from "@material-ui/core/Button"
 import Dialog from "@material-ui/core/Dialog"
 import DialogContent from "@material-ui/core/DialogContent"
-import DialogTitle from "@material-ui/core/DialogTitle"
 import CircularProgress from "@material-ui/core/CircularProgress"
 import Grid from "@material-ui/core/Grid"
 import Typography from "@material-ui/core/Typography"
@@ -19,10 +18,11 @@ import Typography from "@material-ui/core/Typography"
 // Icons
 import UnfoldMore from "@material-ui/icons/UnfoldMore"
 import CloseIcon from "@material-ui/icons/Close"
+import ChatIcon from "@material-ui/icons/Chat"
 
 // Redux
 import { connect } from "react-redux"
-import { getTweet, clearTweet } from "../redux/actions/dataActions"
+import { getTweet, clearTweet } from "../../redux/actions/dataActions"
 
 const styles = theme => ({
 	...theme.customStyles,
@@ -94,7 +94,7 @@ class TweetDialog extends Component {
 				<CircularProgress size={200} thickness={2} />
 			</div>
 		) : (
-			<Grid container spacing={16}>
+			<Grid container spacing={2}>
 				<Grid item sm={5}>
 					<img
 						src={userImage}
@@ -122,6 +122,12 @@ class TweetDialog extends Component {
 					<hr className={classes.separator} />
 
 					<Typography variant="body1">{body}</Typography>
+
+					<LikeButton tweetId={id} likesCount={likesCount}></LikeButton>
+					<MyIconButton toolTipTitle="comment">
+						<ChatIcon color="primary" />
+					</MyIconButton>
+					<span>{commentsCount} comments</span>
 				</Grid>
 			</Grid>
 		)

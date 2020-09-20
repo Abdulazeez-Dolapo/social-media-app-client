@@ -1,6 +1,6 @@
 import React from "react"
 
-// Material UI
+// Material UI components
 import ToolTip from "@material-ui/core/Tooltip"
 import IconButton from "@material-ui/core/IconButton"
 

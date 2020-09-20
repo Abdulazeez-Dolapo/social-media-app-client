@@ -3,8 +3,8 @@ import { Link } from "react-router-dom"
 import PropTypes from "prop-types"
 
 // My Created Components
-import MyIconButton from "./Utilities/MyIconButton"
-import PostTweet from "./PostTweet"
+import MyIconButton from "../Utilities/MyIconButton"
+import PostTweet from "../Tweet/PostTweet"
 
 // Material UI
 import AppBar from "@material-ui/core/AppBar"

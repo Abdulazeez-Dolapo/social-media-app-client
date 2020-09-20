@@ -54,6 +54,10 @@ export default (state = initialState, action) => {
 					}
 					return tweet
 				}),
+				tweet:
+					state.tweet.id === action.payload.id
+						? action.payload
+						: state.tweet,
 			}
 
 		case DELETE_TWEET:

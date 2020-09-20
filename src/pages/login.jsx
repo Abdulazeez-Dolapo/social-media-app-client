@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import withStyles from "@material-ui/core/styles/withStyles"
 import { Link } from "react-router-dom"
 
+// Image
 import Icon from "../images/logo.png"
 
 // Material UI components
