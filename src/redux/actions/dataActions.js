@@ -101,7 +101,7 @@ export const postTweet = newTweetData => async dispatch => {
 		console.log(error.response)
 		dispatch({
 			type: SET_ERRORS,
-			payload: error.response.data.error,
+			payload: error?.response?.data?.error,
 		})
 	}
 }

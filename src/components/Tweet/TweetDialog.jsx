@@ -7,6 +7,7 @@ import { Link } from "react-router-dom"
 // My Created Components
 import MyIconButton from "../Utilities/MyIconButton"
 import LikeButton from "./LikeButton"
+import Comments from "./Comments"
 
 // Material UI components
 import Dialog from "@material-ui/core/Dialog"
@@ -26,10 +27,6 @@ import { getTweet, clearTweet } from "../../redux/actions/dataActions"
 
 const styles = theme => ({
 	...theme.customStyles,
-	separator: {
-		border: "none",
-		margin: 4,
-	},
 	profileImage: {
 		maxWidth: 200,
 		height: 200,
@@ -85,6 +82,7 @@ class TweetDialog extends Component {
 				commentsCount,
 				userImage,
 				userHandle,
+				comments,
 			},
 			UI: { loading },
 		} = this.props
@@ -113,13 +111,13 @@ class TweetDialog extends Component {
 						@{userHandle}
 					</Typography>
 
-					<hr className={classes.separator} />
+					<hr className={classes.invisibleSeparator} />
 
 					<Typography variant="body2" color="textSecondary">
 						{dayjs(createdAt).format("h:mm a, MMMM DD YYYY")}
 					</Typography>
 
-					<hr className={classes.separator} />
+					<hr className={classes.invisibleSeparator} />
 
 					<Typography variant="body1">{body}</Typography>
 
@@ -129,6 +127,9 @@ class TweetDialog extends Component {
 					</MyIconButton>
 					<span>{commentsCount} comments</span>
 				</Grid>
+
+				<hr className={classes.visibleSeparator} />
+				<Comments comments={comments} />
 			</Grid>
 		)
 

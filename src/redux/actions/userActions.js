@@ -36,7 +36,7 @@ export const loginUser = (userData, history) => async dispatch => {
 		console.log(error)
 		dispatch({
 			type: SET_ERRORS,
-			payload: error.response.data.error,
+			payload: error?.response?.data?.error,
 		})
 	}
 }
@@ -54,7 +54,7 @@ export const userSignup = (newUserData, history) => async dispatch => {
 		console.log(error.response)
 		dispatch({
 			type: SET_ERRORS,
-			payload: error.response.data.error,
+			payload: error?.response?.data?.error,
 		})
 	}
 }
@@ -100,7 +100,7 @@ export const editUserDetails = userDetails => async dispatch => {
 		console.log(error.response)
 		dispatch({
 			type: SET_ERRORS,
-			payload: error.response.data.error,
+			payload: error?.response?.data?.error,
 		})
 	}
 }

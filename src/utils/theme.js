@@ -85,5 +85,14 @@ export default {
 		paper: {
 			padding: 20,
 		},
+		invisibleSeparator: {
+			border: "none",
+			margin: 4,
+		},
+		visibleSeparator: {
+			width: "100%",
+			marginBottom: 20,
+			borderBottom: "1px solid rgba(0,0,0,0.1)",
+		},
 	},
 }

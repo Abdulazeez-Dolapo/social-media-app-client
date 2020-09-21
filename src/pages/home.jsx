@@ -22,8 +22,10 @@ class home extends Component {
 
 		const recentTweets = loading ? (
 			<p>Loading Tweets...</p>
-		) : (
+		) : tweets.length > 0 ? (
 			tweets.map(tweet => <Tweet key={tweet.id} tweet={tweet} />)
+		) : (
+			<p>There are no available tweets</p>
 		)
 		return (
 			<Grid container spacing={2}>
