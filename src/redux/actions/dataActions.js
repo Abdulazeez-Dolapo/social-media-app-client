@@ -11,15 +11,17 @@ import {
 	SET_ERRORS,
 	CLEAR_ERRORS,
 	STOP_LOADING_UI,
+	POST_COMMENT,
 } from "../types"
 
 import {
 	getAllTweets,
-	likeSingleTweet,
-	unlikeSingleTweet,
-	deleteSingleTweet,
-	postSingleTweet,
-	getSingleTweet,
+	likeATweet,
+	unlikeATweet,
+	deleteATweet,
+	postATweet,
+	getATweet,
+	postAComment,
 } from "../../services/tweet"
 
 export const getTweets = () => async dispatch => {
@@ -41,7 +43,7 @@ export const getTweets = () => async dispatch => {
 export const getTweet = tweetId => async dispatch => {
 	try {
 		dispatch({ type: LOADING_UI })
-		const { data } = await getSingleTweet(tweetId)
+		const { data } = await getATweet(tweetId)
 		console.log(data)
 
 		dispatch({ type: SET_TWEET, payload: data.tweetData })
@@ -61,7 +63,7 @@ export const clearTweet = () => dispatch => {
 
 export const likeTweet = tweetId => async dispatch => {
 	try {
-		const { data } = await likeSingleTweet(tweetId)
+		const { data } = await likeATweet(tweetId)
 		console.log(data)
 		dispatch({ type: LIKE_TWEET, payload: data.tweet })
 	} catch (error) {
@@ -71,7 +73,7 @@ export const likeTweet = tweetId => async dispatch => {
 
 export const unlikeTweet = tweetId => async dispatch => {
 	try {
-		const { data } = await unlikeSingleTweet(tweetId)
+		const { data } = await unlikeATweet(tweetId)
 		console.log(data)
 		dispatch({ type: UNLIKE_TWEET, payload: data.tweet })
 	} catch (error) {
@@ -81,7 +83,7 @@ export const unlikeTweet = tweetId => async dispatch => {
 
 export const deleteTweet = tweetId => async dispatch => {
 	try {
-		const { data } = await deleteSingleTweet(tweetId)
+		const { data } = await deleteATweet(tweetId)
 		console.log(data)
 		dispatch({ type: DELETE_TWEET, payload: tweetId })
 	} catch (error) {
@@ -92,11 +94,28 @@ export const deleteTweet = tweetId => async dispatch => {
 export const postTweet = newTweetData => async dispatch => {
 	try {
 		dispatch({ type: LOADING_UI })
-		const { data } = await postSingleTweet(newTweetData)
+		const { data } = await postATweet(newTweetData)
 		console.log(data)
 
 		dispatch({ type: POST_TWEET, payload: data.tweet })
-		dispatch({ type: CLEAR_ERRORS })
+		dispatch(clearErrors())
+	} catch (error) {
+		console.log(error.response)
+		dispatch({
+			type: SET_ERRORS,
+			payload: error?.response?.data?.error,
+		})
+	}
+}
+
+export const postComment = (tweetId, commentData) => async dispatch => {
+	try {
+		// dispatch({ type: LOADING_UI })
+		const { data } = await postAComment(tweetId, commentData)
+		console.log(data)
+
+		dispatch({ type: POST_COMMENT, payload: data })
+		dispatch(clearErrors())
 	} catch (error) {
 		console.log(error.response)
 		dispatch({

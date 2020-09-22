@@ -7,6 +7,7 @@ import {
 	UNLIKE_TWEET,
 	DELETE_TWEET,
 	POST_TWEET,
+	POST_COMMENT,
 } from "../types"
 
 const initialState = {
@@ -70,6 +71,22 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				tweets: [action.payload, ...state.tweets],
+			}
+
+		case POST_COMMENT:
+			return {
+				...state,
+				tweets: state.tweets.map(tweet => {
+					if (tweet.id == action.payload.tweet.id) {
+						tweet = action.payload.tweet
+					}
+					return tweet
+				}),
+				tweet: {
+					...state.tweet,
+					commentsCount: action.payload.tweet.commentsCount,
+					comments: [action.payload.comment, ...state.tweet.comments],
+				},
 			}
 
 		default:

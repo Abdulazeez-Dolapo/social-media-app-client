@@ -4,22 +4,26 @@ export const getAllTweets = () => {
 	return axiosInstance.get("/tweets")
 }
 
-export const getSingleTweet = tweetId => {
+export const getATweet = tweetId => {
 	return axiosInstance.get(`/tweet/${tweetId}`)
 }
 
-export const likeSingleTweet = tweetId => {
+export const likeATweet = tweetId => {
 	return axiosInstance.post(`/tweet/${tweetId}/like`)
 }
 
-export const unlikeSingleTweet = tweetId => {
+export const unlikeATweet = tweetId => {
 	return axiosInstance.post(`/tweet/${tweetId}/unlike`)
 }
 
-export const deleteSingleTweet = tweetId => {
+export const deleteATweet = tweetId => {
 	return axiosInstance.delete(`/tweet/${tweetId}`)
 }
 
-export const postSingleTweet = tweetData => {
+export const postATweet = tweetData => {
 	return axiosInstance.post(`/create-tweet`, tweetData)
+}
+
+export const postAComment = (tweetId, commentData) => {
+	return axiosInstance.post(`/tweet/${tweetId}/comment`, commentData)
 }
