@@ -8,6 +8,7 @@ import {
 	DELETE_TWEET,
 	POST_TWEET,
 	POST_COMMENT,
+	UPDATE_USER_IMAGE_IN_TWEETS,
 } from "../types"
 
 const initialState = {
@@ -87,6 +88,17 @@ export default (state = initialState, action) => {
 					commentsCount: action.payload.tweet.commentsCount,
 					comments: [action.payload.comment, ...state.tweet.comments],
 				},
+			}
+
+		case UPDATE_USER_IMAGE_IN_TWEETS:
+			return {
+				...state,
+				tweets: state.tweets.map(tweet => {
+					if (tweet.userHandle == action.payload.userHandle) {
+						tweet.userImage = action.payload.imageUrl
+					}
+					return tweet
+				}),
 			}
 
 		default:

@@ -9,7 +9,10 @@ import {
 	CLEAR_ERRORS,
 	LOADING_UI,
 	SET_UNAUTHENTICATED,
-	lOADING_USER,
+	LOADING_USER,
+	STOP_LOADING_USER,
+	MARK_NOTIFICATIONS_AS_READ,
+	UPDATE_USER_IMAGE_IN_TWEETS,
 } from "../types"
 import {
 	userLogin,
@@ -18,6 +21,8 @@ import {
 	uploadImage,
 	editUserData,
 } from "../../services/auth"
+
+import { markAsRead } from "../../services/notifications"
 
 export const loginUser = (userData, history) => async dispatch => {
 	try {
@@ -66,7 +71,7 @@ export const logoutUser = () => dispatch => {
 
 export const setUserData = () => async dispatch => {
 	try {
-		dispatch({ type: lOADING_USER })
+		dispatch({ type: LOADING_USER })
 		const { data } = await getUserData()
 
 		dispatch({
@@ -81,18 +86,21 @@ export const setUserData = () => async dispatch => {
 
 export const uploadUserImage = formData => async dispatch => {
 	try {
-		dispatch({ type: lOADING_USER })
+		dispatch({ type: LOADING_USER })
 		const { data } = await uploadImage(formData)
 		console.log(data)
 		dispatch(setUserData())
+		const payload = { imageUrl: data.imageUrl, userHandle: data.userHandle }
+		dispatch({ type: UPDATE_USER_IMAGE_IN_TWEETS, payload })
 	} catch (error) {
+		dispatch({ type: STOP_LOADING_USER })
 		console.log(error.response)
 	}
 }
 
 export const editUserDetails = userDetails => async dispatch => {
 	try {
-		dispatch({ type: lOADING_USER })
+		dispatch({ type: LOADING_USER })
 		const { data } = await editUserData(userDetails)
 		console.log(data)
 		dispatch(setUserData())
@@ -102,5 +110,15 @@ export const editUserDetails = userDetails => async dispatch => {
 			type: SET_ERRORS,
 			payload: error?.response?.data?.error,
 		})
+	}
+}
+
+export const markNotificationsAsRead = notificationIds => async dispatch => {
+	try {
+		const { data } = await markAsRead(notificationIds)
+		console.log(data)
+		dispatch({ type: MARK_NOTIFICATIONS_AS_READ })
+	} catch (error) {
+		console.log(error.response)
 	}
 }
