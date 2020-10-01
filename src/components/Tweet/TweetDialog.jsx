@@ -60,12 +60,29 @@ const styles = theme => ({
 class TweetDialog extends Component {
 	state = {
 		openDialog: false,
+		oldPath: "",
+		newPath: "",
+	}
+
+	componentDidMount() {
+		if (this.props.openDialog) this.handleClickOpen()
 	}
 
 	handleClickOpen = () => {
+		let oldPath = window.location.pathname
+		const { userHandle, tweetId } = this.props
+
+		let newPath = `/user/${userHandle}/tweet/${tweetId}`
+
+		if (oldPath === newPath) oldPath = `/user/${userHandle}`
+
+		window.history.pushState(null, "", newPath)
+
 		this.props.getTweet(this.props.tweetId)
 		this.setState({
 			openDialog: true,
+			oldPath,
+			newPath,
 		})
 	}
 
@@ -75,6 +92,7 @@ class TweetDialog extends Component {
 		this.setState({
 			openDialog: false,
 		})
+		window.history.pushState(null, "", this.state.oldPath)
 	}
 
 	render() {

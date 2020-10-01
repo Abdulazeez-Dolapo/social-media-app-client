@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react"
+import React, { Component } from "react"
 import { withStyles } from "@material-ui/core/styles"
 import { Link } from "react-router-dom"
 import PropTypes from "prop-types"
@@ -77,7 +77,7 @@ export class Tweet extends Component {
 					<Typography
 						variant="h5"
 						component={Link}
-						to={`/users/${userHandle}`}
+						to={`/user/${userHandle}`}
 						color="primary"
 					>
 						{userHandle}
@@ -98,7 +98,11 @@ export class Tweet extends Component {
 					<span>{commentsCount} comments</span>
 				</CardContent>
 
-				<TweetDialog tweetId={id} userHandle={userHandle} />
+				<TweetDialog
+					tweetId={id}
+					userHandle={userHandle}
+					openDialog={this.props.openDialog}
+				/>
 			</Card>
 		)
 	}
@@ -108,6 +112,7 @@ Tweet.propTypes = {
 	user: PropTypes.object.isRequired,
 	tweet: PropTypes.object.isRequired,
 	classes: PropTypes.object.isRequired,
+	openDialog: PropTypes.bool,
 }
 
 const mapStateToProps = state => ({

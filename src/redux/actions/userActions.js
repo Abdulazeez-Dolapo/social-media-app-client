@@ -10,7 +10,6 @@ import {
 	LOADING_UI,
 	SET_UNAUTHENTICATED,
 	lOADING_USER,
-	STOP_lOADING_USER,
 } from "../types"
 import {
 	userLogin,
@@ -75,6 +74,7 @@ export const setUserData = () => async dispatch => {
 			payload: data.userData,
 		})
 	} catch (error) {
+		console.log(error)
 		console.log(error.response)
 	}
 }

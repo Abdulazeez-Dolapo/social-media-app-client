@@ -9,10 +9,13 @@ import styles from "./utils/theme"
 
 // Created Components
 import AuthRoute from "./utils/AuthRoute"
+import Navbar from "./components/Layout/Navbar"
+
+// Pages
 import home from "./pages/home"
 import login from "./pages/login"
 import signup from "./pages/signup"
-import Navbar from "./components/Layout/Navbar"
+import user from "./pages/user"
 
 // Redux
 import store from "./redux/store"
@@ -42,6 +45,12 @@ function App() {
 						<Route exact path="/" component={home} />
 						<AuthRoute exact path="/login" component={login} />
 						<AuthRoute exact path="/signup" component={signup} />
+						<Route exact path="/user/:handle" component={user} />
+						<Route
+							exact
+							path="/user/:handle/tweet/:tweetId"
+							component={user}
+						/>
 					</Switch>
 				</div>
 			</Router>

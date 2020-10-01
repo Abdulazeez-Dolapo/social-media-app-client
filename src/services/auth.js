@@ -12,6 +12,10 @@ export const getUserData = () => {
 	return axiosInstance.get("/user/get-details")
 }
 
+export const getUserDetails = userHandle => {
+	return axiosInstance.get(`/user/${userHandle}`)
+}
+
 export const uploadImage = formData => {
 	return axiosInstance.post("/user/upload-image", formData)
 }

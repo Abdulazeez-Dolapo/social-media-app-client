@@ -24,11 +24,12 @@ import {
 	postAComment,
 } from "../../services/tweet"
 
+import { getUserDetails } from "../../services/auth"
+
 export const getTweets = () => async dispatch => {
 	try {
 		dispatch({ type: LOADING_DATA })
 		const { data } = await getAllTweets()
-		console.log(data)
 
 		dispatch({ type: SET_TWEETS, payload: data.tweets })
 	} catch (error) {
@@ -127,4 +128,23 @@ export const postComment = (tweetId, commentData) => async dispatch => {
 
 export const clearErrors = () => dispatch => {
 	dispatch({ type: CLEAR_ERRORS })
+}
+
+export const setUserDetails = userHandle => async dispatch => {
+	try {
+		dispatch({ type: LOADING_DATA })
+		const { data } = await getUserDetails(userHandle)
+		console.log(data)
+
+		dispatch({
+			type: SET_TWEETS,
+			payload: data.userData.tweets,
+		})
+	} catch (error) {
+		console.log(error.response)
+		dispatch({
+			type: SET_TWEETS,
+			payload: [],
+		})
+	}
 }

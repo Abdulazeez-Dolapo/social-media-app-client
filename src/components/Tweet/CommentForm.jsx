@@ -87,7 +87,7 @@ export class CommentForm extends Component {
 					</Button>
 				</form>
 
-				<hr className={classes.visibleSeparator} />
+				<hr className={classes.invisibleSeparator} />
 			</Grid>
 		) : null
 
