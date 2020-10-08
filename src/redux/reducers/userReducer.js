@@ -1,10 +1,13 @@
 import {
 	SET_USER,
+	SET_USER_NOTIFICATIONS,
 	SET_AUTHENTICATED,
 	SET_UNAUTHENTICATED,
-	lOADING_USER,
+	LOADING_USER,
+	STOP_LOADING_USER,
 	LIKE_TWEET,
 	UNLIKE_TWEET,
+	MARK_NOTIFICATIONS_AS_READ,
 } from "../types"
 
 const initialState = {
@@ -33,10 +36,33 @@ export default (state = initialState, action) => {
 				loading: false,
 			}
 
-		case lOADING_USER:
+		case SET_USER_NOTIFICATIONS:
+			const uniqueNotifications = []
+			const notificationIds = state.notifications.map(
+				notification => notification.id
+			)
+
+			action.payload.forEach(notification => {
+				if (!notificationIds.includes(notification.id)) {
+					uniqueNotifications.push(notification)
+				}
+			})
+
+			return {
+				...state,
+				notifications: [...uniqueNotifications, ...state.notifications],
+			}
+
+		case LOADING_USER:
 			return {
 				...state,
 				loading: true,
+			}
+
+		case STOP_LOADING_USER:
+			return {
+				...state,
+				loading: false,
 			}
 
 		case LIKE_TWEET:
@@ -57,6 +83,15 @@ export default (state = initialState, action) => {
 				likes: state.likes.filter(
 					like => like.tweetId !== action.payload.id
 				),
+			}
+
+		case MARK_NOTIFICATIONS_AS_READ:
+			return {
+				...state,
+				notifications: state.notifications.map(notification => {
+					notification.read = true
+					return notification
+				}),
 			}
 
 		default:

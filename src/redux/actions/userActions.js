@@ -12,6 +12,7 @@ import {
 	LOADING_USER,
 	STOP_LOADING_USER,
 	MARK_NOTIFICATIONS_AS_READ,
+	SET_USER_NOTIFICATIONS,
 	UPDATE_USER_IMAGE_IN_TWEETS,
 } from "../types"
 import {
@@ -22,7 +23,7 @@ import {
 	editUserData,
 } from "../../services/auth"
 
-import { markAsRead } from "../../services/notifications"
+import { markAsRead, getNotifications } from "../../services/notifications"
 
 export const loginUser = (userData, history) => async dispatch => {
 	try {
@@ -101,8 +102,7 @@ export const uploadUserImage = formData => async dispatch => {
 export const editUserDetails = userDetails => async dispatch => {
 	try {
 		dispatch({ type: LOADING_USER })
-		const { data } = await editUserData(userDetails)
-		console.log(data)
+		await editUserData(userDetails)
 		dispatch(setUserData())
 	} catch (error) {
 		console.log(error.response)
@@ -110,6 +110,16 @@ export const editUserDetails = userDetails => async dispatch => {
 			type: SET_ERRORS,
 			payload: error?.response?.data?.error,
 		})
+	}
+}
+
+export const getUserNotifications = () => async dispatch => {
+	try {
+		const { data } = await getNotifications()
+		console.log(data)
+		dispatch({ type: SET_USER_NOTIFICATIONS, payload: data.notifications })
+	} catch (error) {
+		console.log(error.response)
 	}
 }
 

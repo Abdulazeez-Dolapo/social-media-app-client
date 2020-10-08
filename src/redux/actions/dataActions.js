@@ -23,7 +23,6 @@ import {
 	getATweet,
 	postAComment,
 } from "../../services/tweet"
-
 import { getUserDetails } from "../../services/auth"
 
 export const getTweets = () => async dispatch => {

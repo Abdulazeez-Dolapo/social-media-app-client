@@ -5,6 +5,7 @@ import PropTypes from "prop-types"
 // My Created Components
 import MyIconButton from "../Utilities/MyIconButton"
 import PostTweet from "../Tweet/PostTweet"
+import Notifications from "./Notifications"
 
 // Material UI
 import AppBar from "@material-ui/core/AppBar"
@@ -13,7 +14,6 @@ import Button from "@material-ui/core/Button"
 
 // Icons
 import HomeIcon from "@material-ui/icons/Home"
-import NotificationsIcon from "@material-ui/icons/Notifications"
 
 // Redux
 import { connect } from "react-redux"
@@ -35,9 +35,7 @@ class Navbar extends Component {
 								</MyIconButton>
 							</Link>
 
-							<MyIconButton toolTipTitle="Notifications">
-								<NotificationsIcon />
-							</MyIconButton>
+							<Notifications />
 						</Fragment>
 					) : (
 						<Fragment>
