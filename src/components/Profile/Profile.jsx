@@ -7,6 +7,7 @@ import dayjs from "dayjs"
 // My Created Components
 import EditProfileDetails from "./EditProfileDetails"
 import MyIconButton from "../Utilities/MyIconButton"
+import ProfileSkeletonLoader from "../../utils/ProfileSkeletonLoader"
 
 // Material UI components
 import Button from "@material-ui/core/Button"
@@ -170,7 +171,7 @@ class Profile extends Component {
 				</Paper>
 			)
 		) : (
-			<p>Loading...</p>
+			<ProfileSkeletonLoader />
 		)
 
 		return <div>{markUp}</div>

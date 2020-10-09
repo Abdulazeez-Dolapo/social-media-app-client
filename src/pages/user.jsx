@@ -5,6 +5,7 @@ import PropTypes from "prop-types"
 import Tweet from "../components/Tweet/Tweet"
 import StaticProfile from "../components/Profile/StaticProfile"
 import TweetSkeletonLoader from "../utils/TweetSkeletonLoader"
+import ProfileSkeletonLoader from "../utils/ProfileSkeletonLoader"
 
 // Material UI
 import Grid from "@material-ui/core/Grid"
@@ -69,7 +70,7 @@ export class user extends Component {
 
 				<Grid item xs={12} sm={4}>
 					{this.state.profile == null ? (
-						<p>Loading Profile...</p>
+						<ProfileSkeletonLoader />
 					) : (
 						<StaticProfile profile={this.state.profile} />
 					)}
