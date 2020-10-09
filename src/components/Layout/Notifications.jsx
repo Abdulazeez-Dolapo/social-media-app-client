@@ -29,12 +29,12 @@ import {
 export class Notifications extends Component {
 	constructor(props) {
 		super(props)
-		this.setState({
-			timer: setInterval(() => {
-				this.props.getUserNotifications()
-			}, 10000),
-		})
+
+		setInterval(() => {
+			this.props.getUserNotifications()
+		}, 10000)
 	}
+
 	state = {
 		anchorElement: null,
 		timer: null,

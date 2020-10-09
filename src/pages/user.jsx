@@ -4,6 +4,7 @@ import PropTypes from "prop-types"
 // My created components
 import Tweet from "../components/Tweet/Tweet"
 import StaticProfile from "../components/Profile/StaticProfile"
+import TweetSkeletonLoader from "../utils/TweetSkeletonLoader"
 
 // Material UI
 import Grid from "@material-ui/core/Grid"
@@ -43,7 +44,7 @@ export class user extends Component {
 		const { tweetId } = this.state
 
 		const tweetsMarkup = loading ? (
-			<p>Loading Tweets...</p>
+			<TweetSkeletonLoader />
 		) : !tweetId ? (
 			tweets.length > 0 ? (
 				tweets.map(tweet => <Tweet key={tweet.id} tweet={tweet} />)

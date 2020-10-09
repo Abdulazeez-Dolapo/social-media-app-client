@@ -7,6 +7,7 @@ import Grid from "@material-ui/core/Grid"
 // My components
 import Tweet from "../components/Tweet/Tweet"
 import Profile from "../components/Profile/Profile"
+import TweetSkeletonLoader from "../utils/TweetSkeletonLoader"
 
 // Redux
 import { connect } from "react-redux"
@@ -21,7 +22,7 @@ class home extends Component {
 		const { loading, tweets } = this.props
 
 		const recentTweets = loading ? (
-			<p>Loading Tweets...</p>
+			<TweetSkeletonLoader />
 		) : tweets.length > 0 ? (
 			tweets.map(tweet => <Tweet key={tweet.id} tweet={tweet} />)
 		) : (
